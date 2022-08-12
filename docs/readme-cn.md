@@ -1,12 +1,8 @@
----
-typora-root-url: ..
----
-
 ## miniKOF——一款纯前端实现的简易版拳皇游戏
 
 <p align="center">中文
      &nbsp;&nbsp;&nbsp;
-    <a href="readme.md">English</a>
+    <a href="/README.md">English</a>
 </p>
 
 - 使用原生html+css+js和jQuery实现
