@@ -10,4 +10,4 @@
   - Version Battle(to do): There are two fighters can be controlled in this version. The left one can jump, move and squat down by pressing `WASD`, and punch by pressing `SPACE`; the right one can jump, move and squat down by pressing `↑←↓→`, and punch by pressing `ENTER`.
   - Version Single(to do): In this version you need to control the left fighter and defeat the right one.
 
-![](/static/img/background/0.gif)
+<p align="center"><img src="/static/img/background/0.gif"></p>
