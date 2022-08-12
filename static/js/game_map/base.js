@@ -1,4 +1,5 @@
 import { KOFObject } from '/static/js/kof_object/base.js';
+import { Controller } from '/static/js/controller/base.js';
 
 class gameMap extends KOFObject {
     constructor(root) {
@@ -6,10 +7,12 @@ class gameMap extends KOFObject {
 
         this.root = root;
 
-        this.$canvas = $(`<canvas id="canvas" width="1200" height="720" tabindex=0></canvas>`);
+        this.$canvas = $(`<canvas id="canvas" width="1280" height="720" tabindex=0></canvas>`);
         this.ctx = this.$canvas[0].getContext('2d');
         this.root.$kof.append(this.$canvas);
         this.$canvas.focus();
+
+        this.controller = new Controller(this.$canvas);
     }
 
     start() {
