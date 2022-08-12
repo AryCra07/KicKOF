@@ -1,7 +1,3 @@
----
-typora-root-url: ./
----
-
 ## miniKOF——A simple implementation of KOF at the front end
 
 <p align="center"><a href="/docs/readme-cn.md">中文</a>
