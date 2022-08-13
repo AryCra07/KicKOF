@@ -18,7 +18,7 @@ class Player extends KOFObject {
         this.vy = 0; // 玩家竖直速度
 
         this.speedx = 550; // 运动水平速率
-        this.speedy = -2300; // 跳起的初始速率
+        this.speedy = -2000; // 跳起的初始速率
 
         this.gravity = 100; // 模拟重力
 
@@ -52,7 +52,11 @@ class Player extends KOFObject {
         }
 
         if (this.status === 0 || this.status === 1) {
-            if (w) {
+            if (space) {
+                this.status = 4;
+                this.vx = 0;
+                this.frame_current_cnt = 0;
+            } else if (w) {
                 if (d) {
                     this.vx = this.speedx;
                 } else if (a) {
@@ -123,8 +127,14 @@ class Player extends KOFObject {
             this.ctx.drawImage(image, this.x, this.y + obj.offset_y, image.width * obj.scale, image.height * obj.scale);
         }
 
+        if (status === 4
+            && parseInt(this.frame_current_cnt / obj.frame_rate) === obj.frame_cnt) {
+            this.status = 0;
+
+        }
         this.frame_current_cnt++;
     }
+
 }
 
 export {
