@@ -27,6 +27,8 @@ class Player extends KOFObject {
         this.pressed_keys = this.root.game_map.controller.pressed_keys;
 
         this.status = 3; // 0:原地不动 1:移动状态 3:跳跃 4:攻击 5:被打 6:死亡
+        this.animations = new Map();
+        this.frame_current_cnt = 0;
     }
 
     start() {
@@ -75,7 +77,9 @@ class Player extends KOFObject {
     }
 
     update_move() {
-        this.vy += this.gravity;
+        if (this.status === 3) {
+            this.vy += this.gravity;
+        }
 
         this.x += this.vx * this.timedelta / 1000;
         this.y += this.vy * this.timedelta / 1000;
@@ -89,12 +93,7 @@ class Player extends KOFObject {
         if (this.x < 0) {
             this.x = 0;
         }
-        // else if (this.x + this.width > 1235) {
-        //     this.x = 1235 - this.width;
-        // }
         else if (this.x + this.width > this.root.game_map.$canvas.width()) {
-            // console.log(this.root.game_map.$canvas.width());
-            // console.log(window.innerWidth);
             this.x = this.root.game_map.$canvas.width() - this.width;
         }
     }
@@ -107,8 +106,24 @@ class Player extends KOFObject {
     }
 
     render() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        // this.ctx.fillStyle = this.color;
+        // this.ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        let status = this.status;
+
+        if (this.status === 1 && this.direction * this.vx < 0) {
+            status = 2;
+        }
+
+        let obj = this.animations.get(status);
+        if (obj && obj.loaded) {
+            let k = parseInt(this.frame_current_cnt / obj.frame_rate) % obj.frame_cnt;
+            let image = obj.gif.frames[k].image;
+            // console.log(image);
+            this.ctx.drawImage(image, this.x, this.y + obj.offset_y, image.width * obj.scale, image.height * obj.scale);
+        }
+
+        this.frame_current_cnt++;
     }
 }
 
