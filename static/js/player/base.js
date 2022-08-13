@@ -18,7 +18,7 @@ class Player extends KOFObject {
         this.vy = 0; // 玩家竖直速度
 
         this.speedx = 550; // 运动水平速率
-        this.speedy = -1900; // 跳起的初始速率
+        this.speedy = -1700; // 跳起的初始速率
 
         this.gravity = 100; // 模拟重力
 
@@ -33,6 +33,28 @@ class Player extends KOFObject {
 
     start() {
 
+    }
+
+    update_move() {
+        if (this.status === 3) {
+            this.vy += this.gravity;
+        }
+
+        this.x += this.vx * this.timedelta / 1000;
+        this.y += this.vy * this.timedelta / 1000;
+
+        if (this.y > 450) {
+            this.y = 450;
+            this.vy = 0;
+            this.status = 0;
+        }
+
+        if (this.x < 0) {
+            this.x = 0;
+        }
+        else if (this.x + this.width > this.root.game_map.$canvas.width()) {
+            this.x = this.root.game_map.$canvas.width() - this.width;
+        }
     }
 
     update_control() {
@@ -75,31 +97,9 @@ class Player extends KOFObject {
                 this.vx = -this.speedx;
                 this.status = 1;
             } else {
-                this.status = 0;
                 this.vx = 0;
+                this.status = 0;
             }
-        }
-    }
-
-    update_move() {
-        if (this.status === 3) {
-            this.vy += this.gravity;
-        }
-
-        this.x += this.vx * this.timedelta / 1000;
-        this.y += this.vy * this.timedelta / 1000;
-
-        if (this.y > 450) {
-            this.y = 450;
-            this.vy = 0;
-            this.status = 0;
-        }
-
-        if (this.x < 0) {
-            this.x = 0;
-        }
-        else if (this.x + this.width > this.root.game_map.$canvas.width()) {
-            this.x = this.root.game_map.$canvas.width() - this.width;
         }
     }
 
@@ -146,7 +146,8 @@ class Player extends KOFObject {
 
                 let k = parseInt(this.frame_current_cnt / obj.frame_rate) % obj.frame_cnt;
                 let image = obj.gif.frames[k].image;
-                this.ctx.drawImage(image, this.root.game_map.$canvas.width() - this.width - this.x, this.y + obj.offset_y, image.width * obj.scale, image.height * obj.scale);
+                this.ctx.drawImage(image, this.root.game_map.$canvas.width() - this.width - this.x, this.y + obj.offset_y,
+                    image.width * obj.scale, image.height * obj.scale);
 
                 this.ctx.restore();
             }
