@@ -9,7 +9,7 @@ class KOF {
         this.players = [
             new Kyo(this, {
                 id: 0,
-                x: 200,
+                x: 100,
                 y: 0,
                 width: 100,
                 height: 200,
@@ -17,7 +17,7 @@ class KOF {
             }),
             new Kyo(this, {
                 id: 1,
-                x: 800,
+                x: 1000,
                 y: 0,
                 width: 100,
                 height: 200,
