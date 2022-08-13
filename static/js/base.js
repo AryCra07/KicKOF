@@ -4,7 +4,6 @@ import { Player } from '/static/js/player/base.js';
 class KOF {
     constructor(id) {
         this.$kof = $('#' + id);
-        // console.log(this.$kof);
 
         this.game_map = new gameMap(this);
         this.players = [

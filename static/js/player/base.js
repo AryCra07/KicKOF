@@ -88,7 +88,13 @@ class Player extends KOFObject {
 
         if (this.x < 0) {
             this.x = 0;
-        } else if (this.x + this.width > this.root.game_map.$canvas.width()) {
+        }
+        // else if (this.x + this.width > 1235) {
+        //     this.x = 1235 - this.width;
+        // }
+        else if (this.x + this.width > this.root.game_map.$canvas.width()) {
+            // console.log(this.root.game_map.$canvas.width());
+            // console.log(window.innerWidth);
             this.x = this.root.game_map.$canvas.width() - this.width;
         }
     }
