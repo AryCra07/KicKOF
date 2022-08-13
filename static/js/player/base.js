@@ -115,17 +115,32 @@ class Player extends KOFObject {
         }
     }
 
+    update_attack() {
+        if (this.status === 4 && this.frame_current_cnt === 18) {
+            let me = this, you = this.root.players[1 - this.id];
+        }
+    }
+
     update() {
         this.update_control();
         this.update_move();
         this.update_direction();
+        this.update_attack();
 
         this.render();
     }
 
     render() {
-        // this.ctx.fillStyle = this.color;
-        // this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.ctx.fillStyle = 'blue';
+        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        if (this.direction > 0) {
+            this.ctx.fillStyle = 'red';
+            this.ctx.fillRect(this.x + 120, this.y + 40, 100, 20);
+        } else {
+            this.ctx.fillStyle = 'red';
+            this.ctx.fillRect(this.x + this.width - 120 - 100, this.y + 40, 100, 20);
+        }
 
         let status = this.status;
 
